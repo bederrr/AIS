@@ -1,0 +1,2 @@
+C:\Users\Konstantin\source\repos\ARIS1-2\ARIS1-2\obj\Debug\ARIS1-2.csprojAssemblyReference.cache
+C:\Users\Konstantin\source\repos\ARIS1-2\ARIS1-2\obj\Debug\ARIS1-2.csproj.CoreCompileInputs.cache

@@ -9,7 +9,7 @@ namespace ARIS1_2
 {
     class Storage
     {
-        List<Clinic> clinics = new List<Clinic>();
+        public List<Clinic> clinics = new List<Clinic>();
 
         public IClinicReader Reader { get; set; }
         public IClinicBinder Binder { get; set; }
@@ -46,9 +46,9 @@ namespace ARIS1_2
                 }
             }
         }
-        public void UploadProcess()
+        public void UploadProcess(Clinic[] tempclinics)
         {
-
+                Saver.Save(tempclinics, "output.txt");
         }
     }
 }

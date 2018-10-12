@@ -12,7 +12,7 @@ namespace ARIS1_2
     {
         public bool IsValid(Clinic clinic)
         {
-            if (String.IsNullOrEmpty(clinic.Model) || clinic.Price <= 0)
+            if (String.IsNullOrEmpty(clinic.city) || clinic.year <= 0 || String.IsNullOrEmpty(clinic.specialization) || clinic.cost < 0 || clinic.doctors_count < 0)
                 return false;
 
             return true;

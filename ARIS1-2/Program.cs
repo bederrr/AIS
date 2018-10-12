@@ -10,8 +10,12 @@ namespace ARIS1_2
     {
         static void Main(string[] args)
         {
-            FileClinicReader filerearer = new FileClinicReader();
-            filerearer.FileReader(@"file.csv");
+            Storage store = new Storage(  new FileClinicReader(), 
+                                            new GeneralClinicBinder(),
+                                            new GeneralClinicValidator(), 
+                                            new TextClinicSaver()
+                                         );
+            store.LoadProcess();
         }
     }
 }

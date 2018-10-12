@@ -7,16 +7,13 @@ using System.IO;
 
 namespace ARIS1_2
 {
-    class FileClinicReader
+    class FileClinicReader:IClinicReader
     {
         string[] lines;
 
-        public string[] FileReader(string input)
+        public string[] GetInputData()
         {
-            if (input != null)
-                return lines = File.ReadAllLines(input, System.Text.Encoding.Default);
-
-            else throw new Exception("Ошибка загрузки файла");
+            return lines = File.ReadAllLines("@input.ru", System.Text.Encoding.Default); 
         }
     }
 }

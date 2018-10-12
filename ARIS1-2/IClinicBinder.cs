@@ -8,7 +8,6 @@ namespace ARIS1_2
 {
     interface IClinicBinder
     {
-        Clinic CreateClinic(string[] data);
-//        Clinic CreateClinic(string data);
+        Clinic CreateClinic(string data);
     }
 }

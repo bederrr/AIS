@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ARIS1_2
 {
-    class IStorage
+    class Storage
     {
         List<Clinic> clinics = new List<Clinic>();
 
@@ -16,28 +16,39 @@ namespace ARIS1_2
         public IClinicValidator Validator { get; set; }
         public IClinicSaver Saver { get; set; }
 
-        public IStorage(IClinicReader reader, IClinicBinder binder, IClinicValidator validator, IClinicSaver saver)
+        public Storage(IClinicReader reader, IClinicBinder binder, IClinicValidator validator, IClinicSaver saver)
         {
             this.Reader = reader;
             this.Binder = binder;
             this.Validator = validator;
-            this.Saver = Saver;
+            this.Saver = saver;
         }
 
-        public void Process()
+        public void LoadProcess()
         {
             string[] data = Reader.GetInputData();
-            Clinic clinic = Binder.CreateClinic(data);
-            if (Validator.IsValid(clinic))
+
+            Clinic[] tempclinics = new Clinic[data.Length];
+
+            for(int i = 0; i<data.Length; i++)
             {
-                clinics.Add(clinic);
-                Saver.Save(clinic, "output.txt");
-                Console.WriteLine("Данные успешно обработаны");
+                tempclinics[i] = Binder.CreateClinic(data[i]);
+
+                if (Validator.IsValid(tempclinics[i]))
+                {
+                    clinics.Add(tempclinics[i]);
+//                    Saver.Save(tempclinics[i], "output.txt");
+                    Console.WriteLine("Данные из строки " + (i+1) + " успешно добавлены в коллекцию\n");
+                }
+                else
+                {
+                    Console.WriteLine("Строка " + (i+1) + " содержит некорректные данные\n");
+                }
             }
-            else
-            {
-                Console.WriteLine("Некорректные данные");
-            }
+        }
+        public void UploadProcess()
+        {
+
         }
     }
 }

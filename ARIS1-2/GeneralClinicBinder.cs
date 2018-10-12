@@ -12,12 +12,13 @@ namespace ARIS1_2
     /// </summary>
     class GeneralClinicBinder : IClinicBinder
     {
-        public void CreateClinic(string[] data)
+ /*       public void CreateClinic(string[] data)
         {
             for (int i = 0; i < data.Length; i++)
                 CreateClinic(data[i]);
             return
         }
+        */
 
         public Clinic CreateClinic(string data)
         {
@@ -29,11 +30,12 @@ namespace ARIS1_2
                 Utilites utilites = new Utilites();
 
                 return new Clinic { city = temp[i++],
-                    year = Int32.Parse(temp[i++]),
-                    specialization = temp[i++],
-                    cost = Int32.Parse(temp[i++]),
-                    doctors_count = Int32.Parse(temp[i++]),
-                    ready = utilites.ToBoolean(temp[i]) };
+                                    year = Int32.Parse(temp[i++]),
+                                    specialization = temp[i++],
+                                    cost = Int32.Parse(temp[i++]),
+                                    doctors_count = Int32.Parse(temp[i++]),
+                                    ready = utilites.ToBoolean(temp[i])
+                                  };
             }
             else
             {

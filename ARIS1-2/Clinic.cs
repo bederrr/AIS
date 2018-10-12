@@ -8,7 +8,6 @@ namespace ARIS1_2
 {
     public class Clinic
     {
-        public int id;
         public string city;
         public int year;
         public string specialization;

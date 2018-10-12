@@ -17,7 +17,7 @@ namespace ARIS1_2
                                        );
             store.LoadProcess();
 
-            ConsoleUI consoleui = new ConsoleUI(store.clinics);
+            ConsoleUI consoleui = new ConsoleUI(store);
             consoleui.Process();
 
         }

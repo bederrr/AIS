@@ -10,7 +10,7 @@ namespace ARIS1_2
     {
         public string[] GetInputData()
         {
-            string templine = "0;";
+            string templine = "";
             string str;
             int temp;
 
@@ -47,7 +47,7 @@ namespace ARIS1_2
             Console.WriteLine("\nВведите 0 или 1 для указания активности:\n");
             templine += Console.ReadLine();
 
-            Parse(templine);
+            return templine;
         }
     }
 }

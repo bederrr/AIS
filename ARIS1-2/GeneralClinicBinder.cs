@@ -6,10 +6,6 @@ using System.Threading.Tasks;
 
 namespace ARIS1_2
 {
-
-    /// <summary>
-    /// //////////////////////////////////////////////////////////
-    /// </summary>
     class GeneralClinicBinder : IClinicBinder
     {
  /*       public void CreateClinic(string[] data)
@@ -22,11 +18,11 @@ namespace ARIS1_2
 
         public Clinic CreateClinic(string data)
         {
-            if (data.Length == 7)
+            if (data.Length == 6)
             {
                 string[] temp = data.Split(';');
 
-                int i = 1;
+                int i = 0;
                 Utilites utilites = new Utilites();
 
                 return new Clinic { city = temp[i++],

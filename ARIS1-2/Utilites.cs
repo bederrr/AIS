@@ -15,5 +15,13 @@ namespace ARIS1_2
 
             return true;
         }
+
+        public string ToString(bool b)
+        {
+            if (b == false)
+                return "Не работает";
+
+            return "Работает";
+        }
     }
 }

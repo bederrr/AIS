@@ -15,9 +15,6 @@ namespace ARIS1_2
 
             for (int i = 0; i < clinics.Count(); i++)
             {
-                lines[i] += clinics[i].id.ToString();
-                lines[i] += ";";
-
                 lines[i] += clinics[i].city;
                 lines[i] += ";";
 

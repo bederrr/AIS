@@ -13,7 +13,7 @@ namespace ARIS1_2
 
         public string[] GetInputData()
         {
-            return lines = File.ReadAllLines("@input.ru", System.Text.Encoding.Default); 
+            return lines = File.ReadAllLines("file.csv", System.Text.Encoding.Default); 
         }
     }
 }

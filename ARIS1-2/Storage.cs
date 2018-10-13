@@ -38,17 +38,17 @@ namespace ARIS1_2
                 {
                     clinics.Add(tempclinics[i]);
 //                    Saver.Save(tempclinics[i], "output.txt");
-                    Console.WriteLine("Данные из строки " + (i+1) + " успешно добавлены в коллекцию\n");
+                    Console.WriteLine("Данные из строки " + (i+1) + " успешно добавлены в коллекцию");
                 }
                 else
                 {
-                    Console.WriteLine("Строка " + (i+1) + " содержит некорректные данные\n");
+                    Console.WriteLine("Строка " + (i+1) + " содержит некорректные данные");
                 }
             }
         }
         public void UploadProcess(Clinic[] tempclinics)
         {
-                Saver.Save(tempclinics, "output.txt");
+                Saver.Save(tempclinics, "file.csv");
         }
     }
 }

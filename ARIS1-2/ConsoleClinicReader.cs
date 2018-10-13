@@ -10,44 +10,44 @@ namespace ARIS1_2
     {
         public string[] GetInputData()
         {
-            string templine = "";
-            string str;
-            int temp;
+            string[] outline = new string[1];
+            string temp;
+            int count;
 
             Console.WriteLine("\nВведите город:\n");
-            templine += Console.ReadLine(); templine += ";";
+            outline[0] = Console.ReadLine(); outline[0] += ";";
 
             do
             {
                 Console.WriteLine("\nВведите год:\n");
-                str = Console.ReadLine();
+                temp = Console.ReadLine();
             }
-            while (!(int.TryParse(str, out temp)));
-            templine += str; templine += ";";
+            while (!(int.TryParse(temp, out count)));
+            outline[0] += temp; outline[0] += ";";
 
             Console.WriteLine("\nВведите специализацию:\n");
-            templine += Console.ReadLine(); templine += ";";
+            outline[0] += Console.ReadLine(); outline[0] += ";";
 
             do
             {
                 Console.WriteLine("\nВведите среднюю цену услуг:\n");
-                str = Console.ReadLine();
+                temp = Console.ReadLine();
             }
-            while (!(int.TryParse(str, out temp)));
-            templine += str; templine += ";";
+            while (!(int.TryParse(temp, out count)));
+            outline[0] += temp; outline[0] += ";";
 
             do
             {
                 Console.WriteLine("\nВведите количество врачей:\n");
-                str = Console.ReadLine();
+                temp = Console.ReadLine();
             }
-            while (!(int.TryParse(str, out temp)));
-            templine += str; templine += ";";
+            while (!(int.TryParse(temp, out count)));
+            outline[0] += temp; outline[0] += ";";
 
             Console.WriteLine("\nВведите 0 или 1 для указания активности:\n");
-            templine += Console.ReadLine();
+            outline[0] += Console.ReadLine();
 
-            return templine;
+            return outline;
         }
     }
 }

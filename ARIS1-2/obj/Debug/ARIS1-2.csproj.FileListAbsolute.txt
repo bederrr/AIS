@@ -2,3 +2,8 @@ C:\Users\Konstantin\source\repos\ARIS1-2\ARIS1-2\obj\Debug\ARIS1-2.csprojAssembl
 C:\Users\Konstantin\source\repos\ARIS1-2\ARIS1-2\obj\Debug\ARIS1-2.csproj.CoreCompileInputs.cache
 C:\git\AIS\ARIS1-2\obj\Debug\ARIS1-2.csprojAssemblyReference.cache
 C:\git\AIS\ARIS1-2\obj\Debug\ARIS1-2.csproj.CoreCompileInputs.cache
+C:\git\AIS\ARIS1-2\bin\Debug\ARIS1-2.exe.config
+C:\git\AIS\ARIS1-2\bin\Debug\ARIS1-2.exe
+C:\git\AIS\ARIS1-2\bin\Debug\ARIS1-2.pdb
+C:\git\AIS\ARIS1-2\obj\Debug\ARIS1-2.exe
+C:\git\AIS\ARIS1-2\obj\Debug\ARIS1-2.pdb

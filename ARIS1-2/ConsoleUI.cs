@@ -34,9 +34,14 @@ namespace ARIS1_2
             
         }
 
+        void AddItemMenu()
+        {
+            IClinicReader ccr = new ConsoleClinicReader();
+        }
+
         void DeleteItemMenu()
         {
-            Console.WriteLine("Введите id клиники, которую нужно удалить из списка");
+            Console.WriteLine("\nВведите id клиники, которую нужно удалить из списка");
             int index = Int32.Parse(Console.ReadLine());
 
             if (index > 0 && index <= storage.clinics.Count)
@@ -67,6 +72,7 @@ namespace ARIS1_2
                     Process();
                     break;
                 case ConsoleKey.S:
+//                    Saver.Save(tempclinics[i], "output.txt");
                     break;
             }
         }

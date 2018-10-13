@@ -18,7 +18,7 @@ namespace ARIS1_2
 
         public Clinic CreateClinic(string data)
         {
-            if (data.Length == 6)
+            if (data.Length >= 7)
             {
                 string[] temp = data.Split(';');
 

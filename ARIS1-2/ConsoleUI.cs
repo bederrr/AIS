@@ -17,7 +17,7 @@ namespace ARIS1_2
         
         void PrintLines()
         {
-            Console.Clear();
+//            Console.Clear();
 
             Utilites utilites = new Utilites();
 
@@ -34,13 +34,25 @@ namespace ARIS1_2
             
         }
 
+        void DeleteItemMenu()
+        {
+            Console.WriteLine("Введите id клиники, которую нужно удалить из списка");
+            int index = Int32.Parse(Console.ReadLine());
+
+            if (index > 0 && index <= storage.clinics.Count)
+                storage.clinics.RemoveAt(index - 1);
+
+            else
+                Console.WriteLine("Введеный номер за пределами списка");            
+        }
+
         public void Process()
         {
             PrintLines();
             Console.WriteLine("\nДля удаления записи нажмите D\n" +
                               "Для добавления записи введите A\n" +
                               "Для выхода из программы нажмите ESC\n" +
-                              "Для сохранения списка в файл нажмите S");
+                              "Для сохранения списка в файл и выхода нажмите S");
 
             switch (Console.ReadKey().Key)
             {
@@ -49,13 +61,12 @@ namespace ARIS1_2
                     break;
                 case ConsoleKey.A:
                     AddItemMenu();
-                    MainMenu();
                     break;
-                case ConsoleKey.N:
-                    EditItemMenu();
+                case ConsoleKey.D:
+                    DeleteItemMenu();
+                    Process();
                     break;
                 case ConsoleKey.S:
-                    SaveFile();
                     break;
             }
         }

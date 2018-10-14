@@ -17,10 +17,10 @@ namespace ARIS1_2
                                        );
             store.LoadProcess();
 
-            ConsoleUI consoleui = new ConsoleUI(store);
-            consoleui.Process();
+//            ConsoleUI consoleui = new ConsoleUI(store);
+//            consoleui.Process();
 
-            Server server = new Server();
+            Server server = new Server(store);
             server.Work();
         }
     }

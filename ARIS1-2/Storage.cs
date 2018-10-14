@@ -46,6 +46,7 @@ namespace ARIS1_2
                 }
             }
         }
+
         public void UploadProcess()
         {
                 Saver.Save(clinics, "file.csv");

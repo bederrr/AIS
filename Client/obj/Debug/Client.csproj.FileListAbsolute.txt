@@ -1,0 +1,7 @@
+C:\git\AIS\Client\bin\Debug\Client.exe.config
+C:\git\AIS\Client\bin\Debug\Client.exe
+C:\git\AIS\Client\bin\Debug\Client.pdb
+C:\git\AIS\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
+C:\git\AIS\Client\obj\Debug\Client.exe
+C:\git\AIS\Client\obj\Debug\Client.pdb
+C:\git\AIS\Client\obj\Debug\Client.csprojAssemblyReference.cache

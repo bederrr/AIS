@@ -12,37 +12,50 @@ namespace ARIS1_2
     class Server
     {
         Storage storage;
-        UdpClient receiver = new UdpClient(8001); // UdpClient для получения данных
-        UdpClient sender = new UdpClient(); // создаем UdpClient для отправки сообщений
-        IPEndPoint remoteIp = null; // адрес входящего подключения
-//        string format = " {0,-2} | {1,-15} | {2,-30} | {3,-5} | {4,-7} | {5,-11} | {6,-14} | {7,-4}\n";
 
         public Server(Storage storage)
         {
             this.storage = storage;
         }
 
-        string FormatMessage(Clinic clinic)
+        string FormatMessage(int index)
         {
             string message = "";
-//            message += String.Format("{0,-2} | {1,-15} | {2,-30} | {3,-5} | {4,-7} | {5,-11} | {6,-14} | {7,-4}\n", "ID", "Название", "Адрес", "Звезд", "Номеров", "Телефон", "ФИО директора", "Бронирование");
-            foreach (var hotel in hotels)
-            {
-                message += String.Format("{0, 2} | {1, 13} | {2, 4} | {3, 10} | {4, 4} | {5, 2} | {6, 4}\n",
-                hotel.Id, hotel.Name, hotel.Address, hotel.NumberOfStars, hotel.NumberOfRooms, hotel.PhoneNumber, hotel.DirectorFIO,
-                hotel.Booking == true ? "Есть" : "Нет");
-            }
-            return message;
+               return message += String.Format("{0, 2} | {1, 13} | {2, 4} | {3, 10} | {4, 4} | {5, 2} | {6, 4}\n",
+                    index,
+                    storage.clinics[--index].city,
+                    storage.clinics[index].year,
+                    storage.clinics[index].specialization,
+                    storage.clinics[index].cost,
+                    storage.clinics[index].doctors_count,
+                    storage.clinics[index].ready == (true) ? "Работает" : "Не работает");
         }
 
         private void SendMessage(string outmessage)
         {
+            UdpClient sender = new UdpClient(); // создаем UdpClient для отправки сообщений
+            try
+            {                
+                    byte[] data = Encoding.Unicode.GetBytes(outmessage);
+                    sender.Send(data, data.Length, "localhost", 8002); // отправка
+                    Console.WriteLine("Отправлено");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void ReceiveMessage()
+        {
+            UdpClient receiver = new UdpClient(8001); // UdpClient для получения данных
+            IPEndPoint remoteIp = null; // адрес входящего подключения
             try
             {
                 while (true)
                 {
-                    byte[] data = Encoding.Unicode.GetBytes(outmessage);
-                    this.sender.Send(data, data.Length, "localhost", 8002); // отправка
+                    byte[] data = receiver.Receive(ref remoteIp); // получаем данные
+                    Action(Encoding.Unicode.GetString(data));
                 }
             }
             catch (Exception ex)
@@ -51,43 +64,45 @@ namespace ARIS1_2
             }
             finally
             {
-                sender.Close();
+                receiver.Close();
             }
         }
 
-        private void ReceiveMessage()
+        private void Action(string line)
         {
-            try
-            {
-                while (true)
-                {
-                    byte[] data = this.receiver.Receive(ref this.remoteIp); // получаем данные
-                    Action(Encoding.Unicode.GetString(data));
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
+            string[] command = line.Split(';');
 
-        private void Action(string msg)
-        {
             int index = -1;
-            if (int.TryParse(msg, out index))
+            if (int.TryParse(command[0], out index))
             {
                 if (index > storage.clinics.Count && index <= 0)
                     SendMessage("Индекс за пределами массива");
-                else SendMessage(storage.clinics[index - 1]);
+                else SendMessage(FormatMessage(index));
             }
 
-            else switch (msg.ToLower())
+            else switch (command[0].ToLower())
                 {
-                    case "a":
+                    case "add":
+                        storage.Reader = new ClientClinicReader(line);
+                        storage.LoadProcess();
                         break;
-                    case "d":
+
+                    case "all":
+                        for (int i = 1; i <= storage.clinics.Count; i++)
+                            SendMessage(FormatMessage(i));
                         break;
-                    case "s":
+
+                    case "del":
+                        int num = Int32.Parse(command[1]);
+                        if (num > 0 && num <= storage.clinics.Count)
+                        {
+                            storage.clinics.RemoveAt(num - 1);
+                            SendMessage("Номер удален");
+                        }
+                        break;
+                        
+                    case "sav":
+                        storage.UploadProcess();
                         break;
                 }
         }

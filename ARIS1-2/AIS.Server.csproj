@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientClinicReader.cs" />
     <Compile Include="Clinic.cs" />
     <Compile Include="ConsoleClinicReader.cs" />
     <Compile Include="ConsoleUI.cs" />

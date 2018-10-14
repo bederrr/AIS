@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARIS1-2", "ARIS1-2\ARIS1-2.csproj", "{A35D6725-5739-41E0-A66A-E662C2EB6EEE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIS.Server", "ARIS1-2\AIS.Server.csproj", "{A35D6725-5739-41E0-A66A-E662C2EB6EEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{E461F59A-50D3-4B24-B29D-C87A34D357D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A35D6725-5739-41E0-A66A-E662C2EB6EEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A35D6725-5739-41E0-A66A-E662C2EB6EEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A35D6725-5739-41E0-A66A-E662C2EB6EEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E461F59A-50D3-4B24-B29D-C87A34D357D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E461F59A-50D3-4B24-B29D-C87A34D357D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E461F59A-50D3-4B24-B29D-C87A34D357D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E461F59A-50D3-4B24-B29D-C87A34D357D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

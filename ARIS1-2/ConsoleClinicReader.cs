@@ -44,7 +44,7 @@ namespace ARIS1_2
             while (!(int.TryParse(temp, out count)));
             outline[0] += temp; outline[0] += ";";
 
-            Console.WriteLine("\nВведите 0 или 1 для указания активности:\n");
+            Console.WriteLine("\nВведите true или false для указания активности:\n");
             outline[0] += Console.ReadLine();
 
             return outline;

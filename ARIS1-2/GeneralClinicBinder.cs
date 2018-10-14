@@ -8,14 +8,6 @@ namespace ARIS1_2
 {
     class GeneralClinicBinder : IClinicBinder
     {
- /*       public void CreateClinic(string[] data)
-        {
-            for (int i = 0; i < data.Length; i++)
-                CreateClinic(data[i]);
-            return
-        }
-        */
-
         public Clinic CreateClinic(string data)
         {
             if (data.Length >= 7)
@@ -23,15 +15,14 @@ namespace ARIS1_2
                 string[] temp = data.Split(';');
 
                 int i = 0;
-                Utilites utilites = new Utilites();
 
                 return new Clinic { city = temp[i++],
                                     year = Int32.Parse(temp[i++]),
                                     specialization = temp[i++],
                                     cost = Int32.Parse(temp[i++]),
                                     doctors_count = Int32.Parse(temp[i++]),
-                                    ready = utilites.ToBoolean(temp[i])
-                                  };
+                                    ready = temp[i].Equals("True") ? true : false
+            };
             }
             else
             {

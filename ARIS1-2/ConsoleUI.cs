@@ -17,9 +17,6 @@ namespace ARIS1_2
         
         void PrintLines()
         {
-//            Console.Clear();
-            Utilites utilites = new Utilites();
-
             for (int i = 0; i < storage.clinics.Count; i++)
             
                 Console.WriteLine("{0, 2}|{1, 13}|{2, 4}|{3, 10}|{4, 4}|{5, 2}|{6, 4}",
@@ -29,13 +26,32 @@ namespace ARIS1_2
                                   storage.clinics[i].specialization,
                                   storage.clinics[i].cost,
                                   storage.clinics[i].doctors_count,
-                                  utilites.ToString(storage.clinics[i].ready));
+                                  storage.clinics[i].ready == (true) ? "Работает" : "Не работает");
             
         }
 
         void AddItemMenu()
         {
-            IClinicReader ccr = new ConsoleClinicReader();
+            storage.Reader = new ConsoleClinicReader();
+
+            string[] data = storage.Reader.GetInputData();
+
+            Clinic tempclinic = new Clinic();
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                tempclinic = storage.Binder.CreateClinic(data[i]);
+
+                if (storage.Validator.IsValid(tempclinic))
+                {
+                    storage.clinics.Add(tempclinic);                //Saver.Save(tempclinics[i], "output.txt");
+                    Console.WriteLine("Данные из строки " + (i + 1) + " успешно добавлены в коллекцию");
+                }
+                else
+                {
+                    Console.WriteLine("Строка " + (i + 1) + " содержит некорректные данные");
+                }
+            }
         }
 
         void DeleteItemMenu()
@@ -65,6 +81,7 @@ namespace ARIS1_2
                     break;
                 case ConsoleKey.A:
                     AddItemMenu();
+                    Process();
                     break;
                 case ConsoleKey.D:
                     DeleteItemMenu();

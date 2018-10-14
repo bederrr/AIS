@@ -10,16 +10,18 @@ namespace ARIS1_2
     {
         static void Main(string[] args)
         {
-            Storage store = new Storage(    new FileClinicReader(), 
-                                            new GeneralClinicBinder(),
-                                            new GeneralClinicValidator(), 
-                                            new FileClinicSaver()
+            Storage store = new Storage(new FileClinicReader(),
+                                        new GeneralClinicBinder(),
+                                        new GeneralClinicValidator(),
+                                        new FileClinicSaver()
                                        );
             store.LoadProcess();
 
             ConsoleUI consoleui = new ConsoleUI(store);
             consoleui.Process();
 
+            Server server = new Server();
+            server.Work();
         }
     }
 }

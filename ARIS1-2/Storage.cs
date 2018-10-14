@@ -22,22 +22,22 @@ namespace ARIS1_2
             this.Binder = binder;
             this.Validator = validator;
             this.Saver = saver;
+   //         this.Utilites = utilites;
         }
 
         public void LoadProcess()
         {
             string[] data = Reader.GetInputData();
 
-            Clinic[] tempclinics = new Clinic[data.Length];
+            Clinic tempclinic = new Clinic();
 
             for(int i = 0; i<data.Length; i++)
             {
-                tempclinics[i] = Binder.CreateClinic(data[i]);
+                tempclinic = Binder.CreateClinic(data[i]);
 
-                if (Validator.IsValid(tempclinics[i]))
+                if (Validator.IsValid(tempclinic))
                 {
-                    clinics.Add(tempclinics[i]);
-//                    Saver.Save(tempclinics[i], "output.txt");
+                    clinics.Add(tempclinic);                //Saver.Save(tempclinics[i], "output.txt");
                     Console.WriteLine("Данные из строки " + (i+1) + " успешно добавлены в коллекцию");
                 }
                 else

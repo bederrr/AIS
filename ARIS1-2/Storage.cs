@@ -46,9 +46,9 @@ namespace ARIS1_2
                 }
             }
         }
-        public void UploadProcess(Clinic[] tempclinics)
+        public void UploadProcess()
         {
-                Saver.Save(tempclinics, "file.csv");
+                Saver.Save(clinics, "file.csv");
         }
     }
 }

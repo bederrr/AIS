@@ -18,7 +18,6 @@ namespace ARIS1_2
         void PrintLines()
         {
 //            Console.Clear();
-
             Utilites utilites = new Utilites();
 
             for (int i = 0; i < storage.clinics.Count; i++)
@@ -72,7 +71,7 @@ namespace ARIS1_2
                     Process();
                     break;
                 case ConsoleKey.S:
-//                    Saver.Save(tempclinics[i], "output.txt");
+                    storage.UploadProcess();
                     break;
             }
         }

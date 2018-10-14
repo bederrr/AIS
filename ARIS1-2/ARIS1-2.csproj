@@ -48,10 +48,10 @@
     <Compile Include="FileClinicReader.cs" />
     <Compile Include="GeneralClinicBinder.cs" />
     <Compile Include="GeneralClinicValidator.cs" />
-    <Compile Include="IClinicBinder.cs" />
-    <Compile Include="IClinicReader.cs" />
-    <Compile Include="IClinicSaver.cs" />
-    <Compile Include="IClinicValidator.cs" />
+    <Compile Include="interfaces\IClinicBinder.cs" />
+    <Compile Include="interfaces\IClinicReader.cs" />
+    <Compile Include="interfaces\IClinicSaver.cs" />
+    <Compile Include="interfaces\IClinicValidator.cs" />
     <Compile Include="Storage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

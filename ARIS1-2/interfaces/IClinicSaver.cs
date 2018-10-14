@@ -8,6 +8,6 @@ namespace ARIS1_2
 {
     interface IClinicSaver
     {
-        void Save(Clinic[] clinics, string fileName);
+        void Save(List<Clinic> clinics, string fileName);
     }
 }

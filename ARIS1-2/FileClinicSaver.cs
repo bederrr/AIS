@@ -9,7 +9,7 @@ namespace ARIS1_2
 {
     class FileClinicSaver : IClinicSaver
     {
-        public void Save(Clinic[] clinics, string fileName)
+        public void Save(List <Clinic> clinics, string fileName)
         {
             string[] lines = new string[clinics.Count()];
 

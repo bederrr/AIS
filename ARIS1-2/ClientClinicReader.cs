@@ -12,8 +12,8 @@ namespace ARIS1_2
 
         public ClientClinicReader(string line)
         {
-            int a = line.IndexOf(';');
-            this.line[0] = line.Substring(a+1);
+ //           int a = line.IndexOf(';');
+            this.line[0] = line.Substring(4);
         }
 
         public string[] GetInputData()

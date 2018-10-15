@@ -6,12 +6,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
+using NLog;
 
 namespace ARIS1_2
 {
     class Server
     {
         Storage storage;
+
+        Logger logger = LogManager.GetCurrentClassLogger();
 
         public Server(Storage storage)
         {
@@ -38,7 +41,8 @@ namespace ARIS1_2
             {                
                     byte[] data = Encoding.Unicode.GetBytes(outmessage);
                     sender.Send(data, data.Length, "localhost", 8002); // отправка
-                    Console.WriteLine("Отправлено");
+                logger.Info("Сервер отправил данные: " + outmessage);
+                    //Console.WriteLine("Отправлено");
             }
             catch (Exception ex)
             {
@@ -55,6 +59,7 @@ namespace ARIS1_2
                 while (true)
                 {
                     byte[] data = receiver.Receive(ref remoteIp); // получаем данные
+                    logger.Info("Клиент прислал:" + Encoding.Unicode.GetString(data));
                     Action(Encoding.Unicode.GetString(data));
                 }
             }
@@ -75,7 +80,7 @@ namespace ARIS1_2
             int index = -1;
             if (int.TryParse(command[0], out index))
             {
-                if (index > storage.clinics.Count && index <= 0)
+                if (index > storage.clinics.Count || index <= 0)
                     SendMessage("Индекс за пределами массива");
                 else SendMessage(FormatMessage(index));
             }
@@ -97,12 +102,13 @@ namespace ARIS1_2
                         if (num > 0 && num <= storage.clinics.Count)
                         {
                             storage.clinics.RemoveAt(num - 1);
-                            SendMessage("Номер удален");
+                            SendMessage("Номер удален\n");
                         }
                         break;
                         
                     case "sav":
                         storage.UploadProcess();
+                        SendMessage("Запись успешно завершена\n");
                         break;
                 }
         }

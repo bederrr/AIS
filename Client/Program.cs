@@ -11,11 +11,12 @@ namespace Client
 {
     class Program
     {
+        static IClinicReader reader;
         static string remoteAddress = "localhost"; // хост для отправки данных
         static int remotePort = 8001; // порт для отправки данных
         static int localPort = 8002; // локальный порт для прослушивания входящих подключений
 
-        private static void SendMessage(string input)
+        static void SendMessage(string input)
         {
             UdpClient sender = new UdpClient(); // создаем UdpClient для отправки сообщений
             try
@@ -30,7 +31,7 @@ namespace Client
 
         }
 
-        private static void ReceiveMessage()
+        static void ReceiveMessage()
         {
             UdpClient receiver = new UdpClient(localPort); // UdpClient для получения данных
             IPEndPoint remoteIp = null; // адрес входящего подключения
@@ -53,45 +54,55 @@ namespace Client
             }
         }
 
+        static string AddItemMenu()
+        {
+            string data="df";
+
+            return data;
+        }
+
         static void ClientAction()
         {
-            Console.WriteLine("Для отображения всех записей введите A\n" +
-                "Для выбора записи введите N\n" +
-                "Для добавления новой записи нажмите F\n" +
-                "Для сохранения текущего списка в файл нажмите S\n" +
-                "Для выхода нажмите ESC\n");
-
-            switch (Console.ReadKey().Key)
+            while (true)
             {
-                case ConsoleKey.Escape:
-                    Environment.Exit(0);
-                    break;
-                case ConsoleKey.A:
-                    SendMessage("all");
-                    ClientAction();
-                    break;
-                case ConsoleKey.N:
-                    Console.WriteLine("\nОтправьте номер записи");
-                    int index = Int32.Parse(Console.ReadLine());
-                    SendMessage(index.ToString());
-                    Console.WriteLine("\nДля удаления записи нажмите D");
-                    switch (Console.ReadKey().Key)
+                //Console.Clear();
+                Console.WriteLine("Для отображения всех записей отправьте all\n" +
+                "Для отображения конкретной записи отправьте её номер\n" +
+                "Для добавления новой записи отправьте add\n" +
+                "Для сохранения текущего списка в файл отправьте save\n");
+
+
+                string input = Console.ReadLine();
+
+                int index = -1;
+                if (int.TryParse(input, out index))
+                {
+                    SendMessage(input);
+                    Console.WriteLine("Отправьте del, если вы хотите удалить элемент");
+                    input = Console.ReadLine();
+                    if (input.ToLower() == "del")
+                        SendMessage("del;"+index.ToString());
+                }
+
+                else switch (input.ToLower())
                     {
-                        case ConsoleKey.D:
-                            SendMessage("del;index");
+                        case "all":
+                            SendMessage(input.ToLower());
                             break;
+
+                        case "add":
+                            reader = new ConsoleClonicReader();
+                            SendMessage(reader.GetInputData());
+                            break;
+
+                        case "save":
+                            SendMessage("sav");
+                            break;
+
                         default:
-                            Console.WriteLine("Error");
+                            Console.WriteLine("Неверная команда");
                             break;
                     }
-
-
-                    ClientAction();
-                    break;
-
-
-
-
             }
         } 
 

@@ -66,6 +66,7 @@ namespace ARIS1_2
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                logger.Info("Ошибка" + ex.Message);
             }
             finally
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    class ConsoleClonicReader : IClinicReader
+    class ConsoleClinicReader : IClinicReader
     {
         public string GetInputData()
         {

@@ -54,13 +54,6 @@ namespace Client
             }
         }
 
-        static string AddItemMenu()
-        {
-            string data="df";
-
-            return data;
-        }
-
         static void ClientAction()
         {
             while (true)
@@ -91,8 +84,9 @@ namespace Client
                             break;
 
                         case "add":
-                            reader = new ConsoleClonicReader();
+                            reader = new ConsoleClinicReader();
                             SendMessage(reader.GetInputData());
+
                             break;
 
                         case "save":

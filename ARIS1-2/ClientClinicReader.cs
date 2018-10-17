@@ -8,12 +8,11 @@ namespace ARIS1_2
 {
     class ClientClinicReader : IClinicReader
     {
-        string[] line;
-
-        public ClientClinicReader(string line)
+        private string[] line = new string[1];
+        
+        public ClientClinicReader(string input)
         {
- //           int a = line.IndexOf(';');
-            this.line[0] = line.Substring(4);
+            this.line[0] = input.Substring(4);
         }
 
         public string[] GetInputData()
@@ -22,3 +21,5 @@ namespace ARIS1_2
         }
     }
 }
+
+

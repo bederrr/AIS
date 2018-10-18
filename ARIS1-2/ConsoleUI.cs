@@ -20,7 +20,7 @@ namespace ARIS1_2
             for (int i = 0; i < storage.clinics.Count; i++)
             
                 Console.WriteLine("{0, 2}|{1, 13}|{2, 4}|{3, 10}|{4, 4}|{5, 2}|{6, 4}",
-                                  i+1,
+                                  storage.clinics[i].ID,
                                   storage.clinics[i].city,
                                   storage.clinics[i].year,
                                   storage.clinics[i].specialization,
@@ -33,25 +33,7 @@ namespace ARIS1_2
         void AddItemMenu()
         {
             storage.Reader = new ConsoleClinicReader();
-
-            string[] data = storage.Reader.GetInputData();
-
-            Clinic tempclinic = new Clinic();
-
-            for (int i = 0; i < data.Length; i++)
-            {
-                tempclinic = storage.Binder.CreateClinic(data[i]);
-
-                if (storage.Validator.IsValid(tempclinic))
-                {
-                    storage.clinics.Add(tempclinic);                //Saver.Save(tempclinics[i], "output.txt");
-                    Console.WriteLine("Данные из строки " + (i + 1) + " успешно добавлены в коллекцию");
-                }
-                else
-                {
-                    Console.WriteLine("Строка " + (i + 1) + " содержит некорректные данные");
-                }
-            }
+            storage.LoadProcess();
         }
 
         void DeleteItemMenu()

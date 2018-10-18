@@ -37,6 +37,11 @@ namespace ARIS1_2
 
                 if (Validator.IsValid(tempclinic))
                 {
+                    if (clinics.Count == 0)
+                        tempclinic.ID = 1;
+                    else
+                        tempclinic.ID = clinics.Last().ID+1;
+
                     clinics.Add(tempclinic);                //Saver.Save(tempclinics[i], "output.txt");
                     Console.WriteLine("Данные из строки " + (i+1) + " успешно добавлены в коллекцию");
                 }

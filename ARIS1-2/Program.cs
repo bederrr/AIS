@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 
 namespace ARIS1_2
 {
@@ -10,6 +11,7 @@ namespace ARIS1_2
     {
         static void Main(string[] args)
         {
+            /*
             Storage store = new Storage(new FileClinicReader(),
                                         new GeneralClinicBinder(),
                                         new GeneralClinicValidator(),
@@ -17,11 +19,16 @@ namespace ARIS1_2
                                        );
             store.LoadProcess();
 
-//            ConsoleUI consoleui = new ConsoleUI(store);
-//            consoleui.Process();
+                                ConsoleUI consoleui = new ConsoleUI(store);
+                                consoleui.Process();
+            
+                    Logger logger = LogManager.GetCurrentClassLogger();
+                    Server server = new Server(store, logger);
+                    server.Work();
+                    */
 
-            Server server = new Server(store);
-            server.Work();
+            DBManager dBManager = new DBManager();
+            dBManager.StartDBManage();
         }
     }
 }

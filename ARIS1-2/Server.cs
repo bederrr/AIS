@@ -14,11 +14,12 @@ namespace ARIS1_2
     {
         Storage storage;
 
-        Logger logger = LogManager.GetCurrentClassLogger();
+        Logger logger;
 
-        public Server(Storage storage)
+        public Server(Storage storage, Logger logger)
         {
             this.storage = storage;
+            this.logger = logger;
         }
 
         string FormatMessage(int index)
@@ -120,8 +121,6 @@ namespace ARIS1_2
             {
                 Thread receiveThread = new Thread(new ThreadStart(ReceiveMessage));
                 receiveThread.Start();
-
-//                receiver.Close();
             }
             catch (Exception ex)
             {

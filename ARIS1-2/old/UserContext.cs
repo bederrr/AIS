@@ -7,9 +7,9 @@ using System.Data.Entity;
 
 namespace ARIS1_2
 {
-    class UserContext : DbContext
+    class ClinicContext : DbContext
     {
-        public UserContext() : base("DbConnection")
+        public ClinicContext() : base("DbConnection")
         { }
 
 

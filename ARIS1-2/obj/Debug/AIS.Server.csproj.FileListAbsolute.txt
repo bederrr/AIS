@@ -5,7 +5,6 @@ C:\git\AIS\ARIS1-2\obj\Debug\ARIS1-2.pdb
 C:\git\AIS\ARIS1-2\bin\Debug\ARIS1-2.exe.config
 C:\git\AIS\ARIS1-2\bin\Debug\ARIS1-2.exe
 C:\git\AIS\ARIS1-2\bin\Debug\ARIS1-2.pdb
-C:\git\AIS\ARIS1-2\bin\Debug\NLog.config
 C:\git\AIS\ARIS1-2\bin\Debug\NLog.dll
 C:\git\AIS\ARIS1-2\bin\Debug\NLog.xml
 C:\git\AIS\ARIS1-2\obj\Debug\AIS.Server.csproj.CopyComplete
@@ -13,3 +12,4 @@ C:\git\AIS\ARIS1-2\bin\Debug\EntityFramework.dll
 C:\git\AIS\ARIS1-2\bin\Debug\EntityFramework.SqlServer.dll
 C:\git\AIS\ARIS1-2\bin\Debug\EntityFramework.xml
 C:\git\AIS\ARIS1-2\bin\Debug\EntityFramework.SqlServer.xml
+C:\git\AIS\ARIS1-2\bin\Debug\old\NLog.config

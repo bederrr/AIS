@@ -57,34 +57,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientClinicReader.cs" />
+    <Compile Include="old\ClientClinicReader.cs" />
     <Compile Include="Clinic.cs" />
     <Compile Include="ConsoleClinicReader.cs" />
     <Compile Include="ConsoleUI.cs" />
-    <Compile Include="DBManager.cs" />
-    <Compile Include="FileClinicReader.cs" />
-    <Compile Include="GeneralClinicBinder.cs" />
-    <Compile Include="GeneralClinicValidator.cs" />
+    <Compile Include="old\DatabaseClinicReader.cs" />
+    <Compile Include="old\FileClinicReader.cs" />
+    <Compile Include="old\GeneralClinicBinder.cs" />
+    <Compile Include="old\GeneralClinicValidator.cs" />
     <Compile Include="interfaces\IClinicBinder.cs" />
     <Compile Include="interfaces\IClinicReader.cs" />
     <Compile Include="interfaces\IClinicSaver.cs" />
     <Compile Include="interfaces\IClinicValidator.cs" />
-    <Compile Include="Server.cs" />
-    <Compile Include="Storage.cs" />
+    <Compile Include="old\Server.cs" />
+    <Compile Include="old\Storage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FileClinicSaver.cs" />
-    <Compile Include="UserContext.cs" />
+    <Compile Include="old\FileClinicSaver.cs" />
+    <Compile Include="old\UserContext.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <Content Include="NLog.config">
+    <None Include="old\App.config" />
+    <Content Include="old\NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="NLog.xsd">
+    <None Include="old\NLog.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
+    <None Include="old\packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

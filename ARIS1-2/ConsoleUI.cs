@@ -8,58 +8,116 @@ namespace ARIS1_2
 {
     class ConsoleUI
     {
-        Storage storage;
+        IClinicReader _reader;
+        IClinicBinder _binder;
+        IClinicValidator _validator;
 
-        public ConsoleUI(Storage storage)
+        void PrintALL()
         {
-            this.storage = storage;
-        }
-        
-        void PrintLines()
-        {
-            for (int i = 0; i < storage.clinics.Count; i++)
-            
-                Console.WriteLine("{0, 2}|{1, 13}|{2, 4}|{3, 10}|{4, 4}|{5, 2}|{6, 4}",
-                                  storage.clinics[i].ID,
-                                  storage.clinics[i].city,
-                                  storage.clinics[i].year,
-                                  storage.clinics[i].specialization,
-                                  storage.clinics[i].cost,
-                                  storage.clinics[i].doctors_count,
-                                  storage.clinics[i].ready == (true) ? "Работает" : "Не работает");
-            
-        }
+            Console.Clear();
+            using (ClinicContext db = new ClinicContext())
+            {
+                var clinics = db.Clinics;
+                foreach (Clinic u in clinics)
+                {
+                    Console.WriteLine("{0, 2}|{1, 13}|{2, 4}|{3, 10}|{4, 4}|{5, 2}|{6, 4}",
+                        u.ID,
+                        u.city,
+                        u.year,
+                        u.specialization,
+                        u.cost,
+                        u.doctors_count,
+                        u.ready == (true) ? "Работает" : "Не работает");
+                }
+            }
+        }           
 
         void AddItemMenu()
         {
-            storage.Reader = new ConsoleClinicReader();
-            storage.LoadProcess();
-        }
+            _reader = new ConsoleClinicReader();
+            _binder = new GeneralClinicBinder();
+            _validator = new GeneralClinicValidator();
+
+            string data = _reader.GetInputData();
+
+            Clinic tempitem = new Clinic();
+
+            tempitem = _binder.CreateClinic(data);
+
+            if (_validator.IsValid(tempitem))
+            {
+                using (ClinicContext db = new ClinicContext())
+                {
+                    var clinics = db.Clinics;
+
+                    db.Clinics.Add(tempitem);
+                    db.SaveChanges();
+                    Console.WriteLine("Объект успешно сохранен");
+                }
+            }
+            return;
+        }       
 
         void DeleteItemMenu()
         {
             Console.WriteLine("\nВведите id клиники, которую нужно удалить из списка");
             int index = Int32.Parse(Console.ReadLine());
 
-            if (index > 0 && index <= storage.clinics.Count)
-                storage.clinics.RemoveAt(index - 1);
+            using (ClinicContext db = new ClinicContext())
+            {
+                var clinic = db.Clinics.FirstOrDefault(o => o.ID == index);
+                if (clinic != null)
+                {
+                    db.Clinics.Remove(clinic);
+                    db.SaveChanges();
+                }
+                else Console.WriteLine("Записи с таким ID не существует");
+                return;
+            }
+        }   
 
-            else
-                Console.WriteLine("Введеный номер за пределами списка");            
+        void PrintItem()
+        {
+            Console.WriteLine("\nВведите ID для отображения");
+
+            int index = Int32.Parse(Console.ReadLine());
+
+            using (ClinicContext db = new ClinicContext())
+            {
+                var clinic = db.Clinics.FirstOrDefault(o => o.ID == index);
+                if (clinic != null)
+                {
+                    Console.WriteLine("{0, 2}|{1, 13}|{2, 4}|{3, 10}|{4, 4}|{5, 2}|{6, 4}",
+                        clinic.ID,
+                        clinic.city,
+                        clinic.year,
+                        clinic.specialization,
+                        clinic.cost,
+                        clinic.doctors_count,
+                        clinic.ready == (true) ? "Работает" : "Не работает" + "\nДля возврата нажмите любую клавишу");
+                    Console.ReadKey();
+                }
+                else Console.WriteLine("Записи с таким ID не существует");
+
+            }
         }
 
         public void Process()
         {
-            PrintLines();
-            Console.WriteLine("\nДля удаления записи нажмите D\n" +
+            PrintALL();
+            Console.WriteLine("\nДля выбора записи нажмите N\n" +
+                              "Для удаления записи нажмите D\n" +
                               "Для добавления записи введите A\n" +
-                              "Для выхода из программы нажмите ESC\n" +
-                              "Для сохранения списка в файл и выхода нажмите S");
+                              "Для выхода из программы нажмите ESC");
 
             switch (Console.ReadKey().Key)
             {
                 case ConsoleKey.Escape:
                     Environment.Exit(0);
+                    break;
+                case ConsoleKey.N:
+                    PrintItem();
+                    Process();
                     break;
                 case ConsoleKey.A:
                     AddItemMenu();
@@ -68,9 +126,6 @@ namespace ARIS1_2
                 case ConsoleKey.D:
                     DeleteItemMenu();
                     Process();
-                    break;
-                case ConsoleKey.S:
-                    storage.UploadProcess();
                     break;
             }
         }

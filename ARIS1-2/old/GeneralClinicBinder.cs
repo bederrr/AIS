@@ -10,13 +10,14 @@ namespace ARIS1_2
     {
         public Clinic CreateClinic(string data)
         {
-            if (data.Length >= 7)
+            if (data.Length >= 6)
             {
                 string[] temp = data.Split(';');
 
                 int i = 0;
 
-                return new Clinic { city = temp[i++],
+                return new Clinic { 
+                                    city = temp[i++],
                                     year = Int32.Parse(temp[i++]),
                                     specialization = temp[i++],
                                     cost = Int32.Parse(temp[i++]),

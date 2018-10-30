@@ -11,24 +11,27 @@ namespace ARIS1_2
     {
         static void Main(string[] args)
         {
-            /*
-            Storage store = new Storage(new FileClinicReader(),
-                                        new GeneralClinicBinder(),
-                                        new GeneralClinicValidator(),
-                                        new FileClinicSaver()
-                                       );
-            store.LoadProcess();
-
-                                ConsoleUI consoleui = new ConsoleUI(store);
-                                consoleui.Process();
             
-                    Logger logger = LogManager.GetCurrentClassLogger();
-                    Server server = new Server(store, logger);
-                    server.Work();
-                    */
+            //Storage store = new Storage(new DatabaseClinicReader(),
+            //                            new GeneralClinicBinder(),
+            //                            new GeneralClinicValidator(),
+            //                            new FileClinicSaver()
+            //                           );
+            //store.LoadProcess();
 
-            DBManager dBManager = new DBManager();
-            dBManager.StartDBManage();
+
+            ConsoleUI consoleui = new ConsoleUI();
+                                consoleui.Process();
+
+
+
+            
+//                   Logger logger = LogManager.GetCurrentClassLogger();
+//                   Server server = new Server(store, logger);
+//                   server.Work();
+                    
+
+
         }
     }
 }

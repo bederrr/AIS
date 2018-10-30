@@ -8,14 +8,14 @@ namespace ARIS1_2
 {
     class ConsoleClinicReader : IClinicReader
     {
-        public string[] GetInputData()
+        public string GetInputData()
         {
-            string[] outline = new string[1];
+            string outline;
             string temp;
             int count;
 
             Console.WriteLine("\nВведите город:\n");
-            outline[0] = Console.ReadLine(); outline[0] += ";";
+            outline= Console.ReadLine(); outline += ";";
 
             do
             {
@@ -23,10 +23,10 @@ namespace ARIS1_2
                 temp = Console.ReadLine();
             }
             while (!(int.TryParse(temp, out count)));
-            outline[0] += temp; outline[0] += ";";
+            outline += temp; outline += ";";
 
             Console.WriteLine("\nВведите специализацию:\n");
-            outline[0] += Console.ReadLine(); outline[0] += ";";
+            outline += Console.ReadLine(); outline += ";";
 
             do
             {
@@ -34,7 +34,7 @@ namespace ARIS1_2
                 temp = Console.ReadLine();
             }
             while (!(int.TryParse(temp, out count)));
-            outline[0] += temp; outline[0] += ";";
+            outline += temp; outline += ";";
 
             do
             {
@@ -42,10 +42,10 @@ namespace ARIS1_2
                 temp = Console.ReadLine();
             }
             while (!(int.TryParse(temp, out count)));
-            outline[0] += temp; outline[0] += ";";
+            outline += temp; outline += ";";
 
             Console.WriteLine("\nВведите true или false для указания активности:\n");
-            outline[0] += Console.ReadLine();
+            outline += Console.ReadLine();
 
             return outline;
         }

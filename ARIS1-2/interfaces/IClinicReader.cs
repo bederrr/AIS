@@ -8,6 +8,6 @@ namespace ARIS1_2
 {
     interface IClinicReader
     {
-        string[] GetInputData();
+        string GetInputData();
     }
 }

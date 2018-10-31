@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Net;
 using System.Net.Sockets;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace Client
 {
@@ -15,6 +17,8 @@ namespace Client
         static string remoteAddress = "localhost"; // хост для отправки данных
         static int remotePort = 8001; // порт для отправки данных
         static int localPort = 8002; // локальный порт для прослушивания входящих подключений
+
+        public ObservableCollection<Clinic> clinics = new ObservableCollection<Clinic>();
 
         static void SendMessage(string input)
         {
@@ -41,7 +45,9 @@ namespace Client
                 {
                     byte[] data = receiver.Receive(ref remoteIp); // получаем данные
                     string message = Encoding.Unicode.GetString(data);
-                    Console.Write(message);
+                    string[] temp = message.Split(';');
+                    if (temp[0] == "item")
+                        AddReceivedItem(message);
                 }
             }
             catch (Exception ex)
@@ -51,6 +57,30 @@ namespace Client
             finally
             {
                 receiver.Close();
+            }
+        }
+
+        static Clinic AddReceivedItem(string datain)
+        {
+            string[] temp = datain.Split(';');
+
+            if (temp.Length >= 7)
+            {
+                int i = 1;
+                return new Clinic
+                {
+                    ID = Int32.Parse(temp[i++]),
+                    city = temp[i++],
+                    year = Int32.Parse(temp[i++]),
+                    specialization = temp[i++],
+                    cost = Int32.Parse(temp[i++]),
+                    doctors_count = Int32.Parse(temp[i++]),
+                    ready = temp[i].Equals("True") ? true : false
+                };
+            }
+            else
+            {
+                throw new Exception("Ошибка привязчика модели. Недостаточно данных для создания модели");
             }
         }
 

@@ -61,6 +61,7 @@
     <Compile Include="Clinic.cs" />
     <Compile Include="ConsoleClinicReader.cs" />
     <Compile Include="ConsoleUI.cs" />
+    <Compile Include="DBClinicReader.cs" />
     <Compile Include="DBManager.cs" />
     <Compile Include="FileClinicReader.cs" />
     <Compile Include="GeneralClinicBinder.cs" />

@@ -22,7 +22,6 @@ namespace ARIS1_2
             this.Binder = binder;
             this.Validator = validator;
             this.Saver = saver;
-   //         this.Utilites = utilites;
         }
 
         public void LoadProcess()
@@ -48,6 +47,29 @@ namespace ARIS1_2
                 else
                 {
                     Console.WriteLine("Строка " + (i+1) + " содержит некорректные данные");
+                }
+            }
+        }
+
+        public void LoadDB()
+        {
+            Clinic tempclinic = new Clinic();
+
+            using (UserContext db = new UserContext())
+            {
+                var clinics = db.Clinics;
+
+                foreach (Clinic u in clinics)
+                {
+                    tempclinic.ID = u.ID;
+                    tempclinic.city = u.city;
+                    tempclinic.year = u.year;
+                    tempclinic.specialization = u.specialization;
+                    tempclinic.cost = u.cost;
+                    tempclinic.doctors_count = u.doctors_count;
+                    tempclinic.ready = u.ready;
+                    clinics.Add(tempclinic);
+                    Console.WriteLine("Клиника " + tempclinic.ID + " считана с базы");
                 }
             }
         }

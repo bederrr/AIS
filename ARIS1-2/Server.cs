@@ -24,22 +24,28 @@ namespace ARIS1_2
 
         string FormatMessage(int index)
         {
-            string message = "";
-               return message += String.Format("{0, 2} | {1, 13} | {2, 4} | {3, 10} | {4, 4} | {5, 2} | {6, 4}\n",
-                    index,
-                    storage.clinics[--index].city,
-                    storage.clinics[index].year,
-                    storage.clinics[index].specialization,
-                    storage.clinics[index].cost,
-                    storage.clinics[index].doctors_count,
-                    storage.clinics[index].ready == (true) ? "Работает" : "Не работает");
+            string message = "item;";
+
+            message = storage.clinics[index].ID.ToString() + ";" +
+            storage.clinics[index].city + ";" +
+            storage.clinics[index].year.ToString() + ";" +
+            storage.clinics[index].specialization + ";" +
+            storage.clinics[index].cost.ToString() + ";" +
+            storage.clinics[index].doctors_count.ToString() + ";";
+
+            if (storage.clinics[index].ready)
+                message += "true";
+            else
+                message += "false";
+
+            return message;
         }
 
         private void SendMessage(string outmessage)
         {
             UdpClient sender = new UdpClient(); // создаем UdpClient для отправки сообщений
             try
-            {                
+            {
                     byte[] data = Encoding.Unicode.GetBytes(outmessage);
                     sender.Send(data, data.Length, "localhost", 8002); // отправка
                 logger.Info("Сервер отправил данные: " + outmessage);

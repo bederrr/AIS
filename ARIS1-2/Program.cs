@@ -22,13 +22,18 @@ namespace ARIS1_2
                                 ConsoleUI consoleui = new ConsoleUI(store);
                                 consoleui.Process();
             
-                    Logger logger = LogManager.GetCurrentClassLogger();
+
                     Server server = new Server(store, logger);
                     server.Work();
                     */
 
-            DBManager dBManager = new DBManager();
-            dBManager.StartDBManage();
+            Logger logger = LogManager.GetCurrentClassLogger();
+
+            Storage store = new Storage();
+            store.LoadDB();
+
+            Server server = new Server(store, logger);
+            server.Work();
         }
     }
 }

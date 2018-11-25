@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIS.Server", "ARIS1-2\AIS.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{E461F59A-50D3-4B24-B29D-C87A34D357D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientWPF", "ClientWPF\ClientWPF.csproj", "{B7F85C28-0349-4417-BD7E-178494212BDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFLogger", "WPFLogger\WPFLogger.csproj", "{B02AB293-6084-4942-A0AB-BEDE0EE704A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{E461F59A-50D3-4B24-B29D-C87A34D357D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E461F59A-50D3-4B24-B29D-C87A34D357D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E461F59A-50D3-4B24-B29D-C87A34D357D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7F85C28-0349-4417-BD7E-178494212BDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7F85C28-0349-4417-BD7E-178494212BDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7F85C28-0349-4417-BD7E-178494212BDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7F85C28-0349-4417-BD7E-178494212BDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B02AB293-6084-4942-A0AB-BEDE0EE704A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B02AB293-6084-4942-A0AB-BEDE0EE704A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B02AB293-6084-4942-A0AB-BEDE0EE704A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B02AB293-6084-4942-A0AB-BEDE0EE704A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

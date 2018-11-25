@@ -1,0 +1,15 @@
+C:\git\AIS\WPFLogger\bin\Debug\WPFLogger.exe.config
+C:\git\AIS\WPFLogger\bin\Debug\WPFLogger.exe
+C:\git\AIS\WPFLogger\bin\Debug\WPFLogger.pdb
+C:\git\AIS\WPFLogger\obj\Debug\WPFLogger.csprojAssemblyReference.cache
+C:\git\AIS\WPFLogger\obj\Debug\MainWindow.g.cs
+C:\git\AIS\WPFLogger\obj\Debug\App.g.cs
+C:\git\AIS\WPFLogger\obj\Debug\WPFLogger_MarkupCompile.cache
+C:\git\AIS\WPFLogger\obj\Debug\WPFLogger_MarkupCompile.lref
+C:\git\AIS\WPFLogger\obj\Debug\MainWindow.baml
+C:\git\AIS\WPFLogger\obj\Debug\WPFLogger.g.resources
+C:\git\AIS\WPFLogger\obj\Debug\WPFLogger.Properties.Resources.resources
+C:\git\AIS\WPFLogger\obj\Debug\WPFLogger.csproj.GenerateResource.cache
+C:\git\AIS\WPFLogger\obj\Debug\WPFLogger.csproj.CoreCompileInputs.cache
+C:\git\AIS\WPFLogger\obj\Debug\WPFLogger.exe
+C:\git\AIS\WPFLogger\obj\Debug\WPFLogger.pdb

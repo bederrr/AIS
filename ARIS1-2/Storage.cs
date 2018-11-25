@@ -24,6 +24,11 @@ namespace ARIS1_2
             this.Saver = saver;
         }
 
+        public Storage()
+        {
+            Console.WriteLine("Загрузка с базы данных");
+        }
+
         public void LoadProcess()
         {
             string[] data = Reader.GetInputData();
@@ -57,9 +62,9 @@ namespace ARIS1_2
 
             using (UserContext db = new UserContext())
             {
-                var clinics = db.Clinics;
-
-                foreach (Clinic u in clinics)
+                var dbclinics = db.Clinics;
+                int i = 0;
+                foreach (Clinic u in dbclinics)
                 {
                     tempclinic.ID = u.ID;
                     tempclinic.city = u.city;
@@ -69,7 +74,8 @@ namespace ARIS1_2
                     tempclinic.doctors_count = u.doctors_count;
                     tempclinic.ready = u.ready;
                     clinics.Add(tempclinic);
-                    Console.WriteLine("Клиника " + tempclinic.ID + " считана с базы");
+                    
+                    Console.WriteLine("Клиника " + clinics[i++].ID + " считана с базы");
                 }
             }
         }
@@ -78,5 +84,24 @@ namespace ARIS1_2
         {
                 Saver.Save(clinics, "file.csv");
         }
-    }
+
+        public void UploadDB()
+        {
+            using (UserContext db = new UserContext())
+            {
+                var dbclinics = db.Clinics;
+
+                dbclinics.RemoveRange(dbclinics);
+
+                foreach (Clinic u in clinics)
+                {
+                    dbclinics.Add(u);
+                    Console.WriteLine("Клиника " + u.ID + " добавлена в базу");
+                }
+
+                db.SaveChanges();
+                Console.WriteLine("Выгрузка завершена");
+            }
+        }
+    }    
 }

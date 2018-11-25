@@ -13,7 +13,6 @@ namespace ARIS1_2
     class Server
     {
         Storage storage;
-
         Logger logger;
 
         public Server(Storage storage, Logger logger)
@@ -24,9 +23,9 @@ namespace ARIS1_2
 
         string FormatMessage(int index)
         {
-            string message = "item;";
+            string message = "item;" +
 
-            message = storage.clinics[index].ID.ToString() + ";" +
+            storage.clinics[index].ID.ToString() + ";" +
             storage.clinics[index].city + ";" +
             storage.clinics[index].year.ToString() + ";" +
             storage.clinics[index].specialization + ";" +
@@ -46,10 +45,10 @@ namespace ARIS1_2
             UdpClient sender = new UdpClient(); // создаем UdpClient для отправки сообщений
             try
             {
-                    byte[] data = Encoding.Unicode.GetBytes(outmessage);
-                    sender.Send(data, data.Length, "localhost", 8002); // отправка
+                byte[] data = Encoding.Unicode.GetBytes(outmessage);
+                sender.Send(data, data.Length, "localhost", 8002); // отправка
                 logger.Info("Сервер отправил данные: " + outmessage);
-                    //Console.WriteLine("Отправлено");
+                Console.WriteLine("Отправлено " + outmessage);
             }
             catch (Exception ex)
             {
@@ -66,8 +65,18 @@ namespace ARIS1_2
                 while (true)
                 {
                     byte[] data = receiver.Receive(ref remoteIp); // получаем данные
-                    logger.Info("Клиент прислал:" + Encoding.Unicode.GetString(data));
-                    Action(Encoding.Unicode.GetString(data));
+                    string message = Encoding.Unicode.GetString(data);
+                    logger.Info("Клиент прислал:" + message);
+                    string[] temp = message.Split(';');
+
+                    if (temp[0] == "go")
+                        SendAll();
+
+                    else if (temp[0] == "item")
+                        AddClinic(message);
+
+                    else if (temp[0] == "end")
+                        storage.UploadDB();
                 }
             }
             catch (Exception ex)
@@ -81,44 +90,55 @@ namespace ARIS1_2
             }
         }
 
-        private void Action(string line)
+        private void SendAll()
         {
-            string[] command = line.Split(';');
-
-            int index = -1;
-            if (int.TryParse(command[0], out index))
+            using (UserContext db = new UserContext())
             {
-                if (index > storage.clinics.Count || index <= 0)
-                    SendMessage("Индекс за пределами массива");
-                else SendMessage(FormatMessage(index));
-            }
-
-            else switch (command[0].ToLower())
+                var dbclinics = db.Clinics;
+                foreach (Clinic u in dbclinics)
                 {
-                    case "add":
-                        storage.Reader = new ClientClinicReader(line);
-                        storage.LoadProcess();
-                        break;
-
-                    case "all":
-                        for (int i = 1; i <= storage.clinics.Count; i++)
-                            SendMessage(FormatMessage(i));
-                        break;
-
-                    case "del":
-                        int num = Int32.Parse(command[1]);
-                        if (num > 0 && num <= storage.clinics.Count)
-                        {
-                            storage.clinics.RemoveAt(num - 1);
-                            SendMessage("Номер удален\n");
-                        }
-                        break;
-                        
-                    case "sav":
-                        storage.UploadProcess();
-                        SendMessage("Запись успешно завершена\n");
-                        break;
+                    string message = "item;" +
+                               u.ID.ToString() + ";" +
+                               u.city + ";" +
+                               u.year.ToString() + ";" +
+                               u.specialization + ";" +
+                               u.cost.ToString() + ";" +
+                               u.doctors_count.ToString() + ";";
+                    if (u.ready)
+                        message += "true";
+                    else
+                        message += "false";
+                    SendMessage(message);
+                    Console.WriteLine("запись " + u.ID + " отправлена");
                 }
+                SendMessage("end");
+                storage.clinics.Clear();
+            }
+        }
+
+        public void AddClinic(string datain)
+        {
+            try
+            {
+                    string[] temp = datain.Split(';');
+                    Clinic tempclinic = new Clinic();
+
+                    int i = 1;
+                    storage.clinics.Add(new Clinic()
+                    {
+                        ID = Int32.Parse(temp[i++]),
+                        city = temp[i++],
+                        year = Int32.Parse(temp[i++]),
+                        specialization = temp[i++],
+                        cost = Int32.Parse(temp[i++]),
+                        doctors_count = Int32.Parse(temp[i++]),
+                        ready = temp[i].Equals("true") ? true : false
+                    });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         public void Work()
@@ -127,6 +147,8 @@ namespace ARIS1_2
             {
                 Thread receiveThread = new Thread(new ThreadStart(ReceiveMessage));
                 receiveThread.Start();
+
+                SendMessage("ready");
             }
             catch (Exception ex)
             {

@@ -18,7 +18,7 @@ namespace Client
         static int remotePort = 8001; // порт для отправки данных
         static int localPort = 8002; // локальный порт для прослушивания входящих подключений
 
-        public ObservableCollection<Clinic> clinics = new ObservableCollection<Clinic>();
+        public static ObservableCollection<Clinic> clinics = new ObservableCollection<Clinic>();
 
         static void SendMessage(string input)
         {
@@ -26,7 +26,8 @@ namespace Client
             try
             {
                     byte[] data = Encoding.Unicode.GetBytes(input);
-                    sender.Send(data, data.Length, remoteAddress, remotePort); // отправка                
+                    sender.Send(data, data.Length, remoteAddress, remotePort); // отправка               
+                Console.WriteLine("отправлено " + input);
             }
             catch (Exception ex)
             {
@@ -46,7 +47,10 @@ namespace Client
                     byte[] data = receiver.Receive(ref remoteIp); // получаем данные
                     string message = Encoding.Unicode.GetString(data);
                     string[] temp = message.Split(';');
-                    if (temp[0] == "item")
+                    if (temp[0] == "ready")
+                        SendMessage("go");
+
+                    else if (temp[0] == "item")
                         AddReceivedItem(message);
                 }
             }
@@ -60,14 +64,14 @@ namespace Client
             }
         }
 
-        static Clinic AddReceivedItem(string datain)
+        static void AddReceivedItem(string datain)
         {
             string[] temp = datain.Split(';');
 
             if (temp.Length >= 7)
             {
                 int i = 1;
-                return new Clinic
+                clinics.Add(new Clinic()
                 {
                     ID = Int32.Parse(temp[i++]),
                     city = temp[i++],
@@ -76,7 +80,8 @@ namespace Client
                     cost = Int32.Parse(temp[i++]),
                     doctors_count = Int32.Parse(temp[i++]),
                     ready = temp[i].Equals("True") ? true : false
-                };
+                });
+                Console.WriteLine("Объект добавлен");
             }
             else
             {
@@ -136,7 +141,9 @@ namespace Client
             {
                 Thread receiveThread = new Thread(new ThreadStart(ReceiveMessage));
                 receiveThread.Start();
-                ClientAction();
+
+
+//                ClientAction();
             }
             catch (Exception ex)
             {
